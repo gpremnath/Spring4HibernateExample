@@ -7,6 +7,6 @@
 </head>
 <body>
 Dear <strong>${user}</strong>, Welcome to DBA Page.
-<a href="<c:url value="/logout" />">Logout</a>
+<jsp:include page="logout.jsp"/>
 </body>
 </html>

@@ -21,7 +21,7 @@
 <body>
 
 <h2>Registration Form</h2>
-
+<jsp:include page="logout.jsp"/>
 <form:form method="POST" modelAttribute="employee">
     <form:input type="hidden" path="id" id="id"/>
     <table>

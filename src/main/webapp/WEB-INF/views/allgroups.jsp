@@ -18,6 +18,7 @@
 
 <body>
 <h2>List of Groups</h2>
+<jsp:include page="logout.jsp"/>
 <table>
   <tr>
     <td>NAME</td><td></td>
