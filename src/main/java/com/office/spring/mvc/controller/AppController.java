@@ -86,7 +86,7 @@ public class AppController {
         service.saveEmployee(employee);
 
         model.addAttribute("success", "Employee " + employee.getName() + " registered successfully");
-        return "success";
+        return "sucess";
     }
 
 

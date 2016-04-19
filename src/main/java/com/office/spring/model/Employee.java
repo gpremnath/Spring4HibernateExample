@@ -3,6 +3,8 @@ package com.office.spring.model;
 /**
  * Created by totient on 30/7/15.
  */
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,7 +23,7 @@ public class Employee implements Serializable {
     private String name;
 
     @Column(name = "joining_date", nullable = false)
-
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date joiningDate;
 
     @Column(name = "salary", nullable = false)

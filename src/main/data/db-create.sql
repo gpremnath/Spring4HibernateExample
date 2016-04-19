@@ -18,6 +18,20 @@ WITH (
 ALTER TABLE employee
   OWNER TO postgres;
 
+
+CREATE TABLE groups
+(
+  group_id serial NOT NULL,
+  name character varying(45) NOT NULL,
+  CONSTRAINT groups_pkey PRIMARY KEY (group_id )
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE groups
+OWNER TO postgres;
+
+
 CREATE TABLE employee_groups
 (
   employee_id integer NOT NULL,
@@ -35,17 +49,7 @@ OIDS=FALSE
 ALTER TABLE employee_groups
 OWNER TO postgres;
 
-CREATE TABLE groups
-(
-  group_id serial NOT NULL,
-  name character varying(45) NOT NULL,
-  CONSTRAINT groups_pkey PRIMARY KEY (group_id )
-)
-WITH (
-OIDS=FALSE
-);
-ALTER TABLE groups
-OWNER TO postgres;
+
 
 CREATE TABLE team
 (
