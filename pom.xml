@@ -136,7 +136,7 @@
                     <configuration>
                         <path>/SpringHibernateExample</path>
                         <update>true</update>
-                        <url>http://127.0.0.1:8080/manager/text</url>
+                        <url>http://127.0.0.1/manager/text</url>
                         <username>tomcat</username>
                         <password>tomcat</password>
                     </configuration>
