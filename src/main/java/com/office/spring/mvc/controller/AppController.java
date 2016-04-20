@@ -22,7 +22,9 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 
 @Controller
@@ -38,7 +40,7 @@ public class AppController {
     /*
      * This method will list all existing employees.
      */
-    @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/list"}, method = {RequestMethod.GET,RequestMethod.POST})
     public String listEmployees(ModelMap model) {
 
         List<Employee> employees = service.findAllEmployees();
@@ -86,7 +88,7 @@ public class AppController {
         service.saveEmployee(employee);
 
         model.addAttribute("success", "Employee " + employee.getName() + " registered successfully");
-        //return "sucess";
+
         return "redirect:/list";
     }
 
@@ -102,28 +104,34 @@ public class AppController {
         return "registration";
     }
 
+    @RequestMapping(value = "/forWardToRegWithErrors", method ={RequestMethod.POST})
+    public String redirectToRegWithError()  {
+           return "registration";
+    }
+
+
     /*
      * This method will be called on form submission, handling POST request for
      * updating employee in database. It also validates the user input
      */
     @RequestMapping(value = {"/edit-{ssn}-employee"}, method = RequestMethod.POST)
-    public String updateEmployee(@Valid Employee employee, BindingResult result,
+    public ModelAndView updateEmployee(@Valid Employee employee, BindingResult result,
                                  ModelMap model, @PathVariable String ssn) {
 
         if (result.hasErrors()) {
-            return "registration";
+            return new ModelAndView("forward:/forWardToRegWithErrors", model);
         }
 
         if (!service.isEmployeeSsnUnique(employee.getId(), employee.getSsn())) {
             FieldError ssnError = new FieldError("employee", "ssn", messageSource.getMessage("non.unique.ssn", new String[]{employee.getSsn()}, Locale.getDefault()));
             result.addError(ssnError);
-            return "registration";
+            return new ModelAndView("forward:/forWardToRegWithErrors", model);
         }
 
         service.updateEmployee(employee);
 
         model.addAttribute("success", "Employee " + employee.getName() + " updated successfully");
-        return "success";
+        return new ModelAndView("forward:/list", model);
     }
 
 

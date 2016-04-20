@@ -34,6 +34,8 @@
     </c:forEach>
 </table>
 <br/>
+<jsp:include page="success.jsp"/>
+<br/>
 <a href="<c:url value='/new' />">Add New Employee</a>
 </body>
 </html>
